@@ -1,48 +1,66 @@
-class ClienteRepository{
-//CRUD // Colocar todas as regras para o SQL
-create() {
-    const dadosCliente = req.body
-    const sql = "INSERT INTO clientes SET ?;" 
-    conexao.query(sql, dadosCliente, (error, result) => {
-        if(error){
-            res.status(404).json({'erro': error})
-        }else{           
-            res.status(201).json(result)
-        }
-    })
-}
+import conexao from '../database/conexao.js'
 
-findAll() {
-    const sql = "SELECT * FROM clientes"
+class ClienteRepository {
+    //CRUD // Colocar todas as regras para o SQL
+    create(cliente) {
+        const sql = "INSERT INTO clientes SET ?"
+        return new Promise((resolve, reject) => {
+            conexao.query(sql, cliente, (error, result) => {
+                if (error) return reject('Não foi possível cadastrar')
+                // fazer o parse dos resultados
+                const row = JSON.parse(JSON.stringify(result))
+                return resolve(row)
+            })
+        })
+    }
+
+    findAll() {
+        const sql = "SELECT * FROM clientes"
+        return new Promise((resolve, reject) => {
             conexao.query(sql, (error, result) => {
-                if(error){
-                    res.status(404).json({'erro': error})
-                }else{
-                    res.status(200).json(result)
-                }
+                if (error) return reject('Não foi possível localizar')
+                // fazer o parse dos resultados
+                const row = JSON.parse(JSON.stringify(result))
+                return resolve(row)
             })
-}
+        })
+    }
 
-findById() {
-    const idCliente = req.params.id
-            const sql = "SELECT * FROM clientes WHERE idCliente=?;" 
-            conexao.query(sql, idCliente, (error, result) => {
-                const linha = result[0]
-                if(error){
-                    res.status(404).json({'erro': error})
-                }else{           
-                    res.status(200).json(linha)
-                }
+    findById(id) {
+        const sql = "SELECT * FROM clientes WHERE idCliente=?;"
+        return new Promise((resolve, reject) => {
+            conexao.query(sql, id,(error, result) => {
+                if (error) return reject('Não foi possível localizar')
+                // fazer o parse dos resultados
+                const row = JSON.parse(JSON.stringify(result))
+                return resolve(row)
             })
-}
+        })
+    }
 
-update() {
+    update(cliente, idCliente) {
+        const sql = "UPDATE clientes SET ? WHERE idCliente=?;" 
+        return new Promise((resolve, reject) => {
+            conexao.query(sql, [cliente, idCliente],(error, result) => {
+                if (error) return reject('Não foi possível atualizar')
+                // fazer o parse dos resultados
+                const row = JSON.parse(JSON.stringify(result))
+                return resolve(row)
+            })
+        })
+    }
 
-}
-
-delete() {
-
-}
+    delete(idCliente) {
+        const sql = "DELETE FROM clientes WHERE idCliente=?;" 
+        return new Promise((resolve, reject) => {
+            conexao.query(sql, idCliente,(error, result) => {
+                if (error) return reject('Não foi possível apagar')
+                // fazer o parse dos resultados
+                const row = JSON.parse(JSON.stringify(result))
+                return resolve(row)
+            })
+        })
+    }
 
 }
 
