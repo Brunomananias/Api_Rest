@@ -1,67 +1,32 @@
-import conexao from '../database/conexao.js'
+import { consulta } from '../database/conexao.js'
 //Persistencia de dados
 class ClienteRepository {
     //CRUD // Colocar todas as regras para o SQL
     create(cliente) {
         const sql = "INSERT INTO clientes SET ?"
-        return new Promise((resolve, reject) => {
-            conexao.query(sql, cliente, (error, result) => {
-                if (error) return reject('Não foi possível cadastrar')
-                // fazer o parse dos resultados
-                const row = JSON.parse(JSON.stringify(result))
-                return resolve(row)
-            })
-        })
+        return consulta(sql, cliente,'Não foi possível localizar')
     }
 
     findAll() {
         const sql = "SELECT * FROM clientes"
-        return new Promise((resolve, reject) => {
-            conexao.query(sql, (error, result) => {
-                if (error) return reject('Não foi possível localizar')
-                // fazer o parse dos resultados
-                const row = JSON.parse(JSON.stringify(result))
-                return resolve(row)
-            })
-        })
+        return consulta(sql, 'Não foi possível localizar')
+      
     }
 
     findById(id) {
         const sql = "SELECT * FROM clientes WHERE idCliente=?;"
-        return new Promise((resolve, reject) => {
-            conexao.query(sql, id,(error, result) => {
-                if (error) return reject('Não foi possível localizar')
-                // fazer o parse dos resultados
-                const row = JSON.parse(JSON.stringify(result))
-                return resolve(row)
-            })
-        })
+        return consulta(sql, id, 'Não foi possível localizar')
     }
 
     update(cliente, idCliente) {
         const sql = "UPDATE clientes SET ? WHERE idCliente=?;" 
-        return new Promise((resolve, reject) => {
-            conexao.query(sql, [cliente, idCliente],(error, result) => {
-                if (error) return reject('Não foi possível atualizar')
-                // fazer o parse dos resultados
-                const row = JSON.parse(JSON.stringify(result))
-                return resolve(row)
-            })
-        })
+        return consulta(sql, [cliente, idCliente], 'Não foi possível atualizar')
     }
 
     delete(idCliente) {
         const sql = "DELETE FROM clientes WHERE idCliente=?;" 
-        return new Promise((resolve, reject) => {
-            conexao.query(sql, idCliente,(error, result) => {
-                if (error) return reject('Não foi possível apagar')
-                // fazer o parse dos resultados
-                const row = JSON.parse(JSON.stringify(result))
-                return resolve(row)
-            })
-        })
+        return consulta(sql, idCliente, 'Não foi possível deletar')
     }
-
 }
 
 export default new ClienteRepository

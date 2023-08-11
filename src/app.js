@@ -1,5 +1,4 @@
 import express from 'express'
-import conexao from './app/database/conexao.js'
 import ClienteController from './app/controllers/clienteController.js'
 const app = express()
 
