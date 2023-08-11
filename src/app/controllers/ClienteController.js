@@ -1,6 +1,5 @@
 //Colocar toda regra de negócio
 //Regra genericas que vão ser usadas para chamar do repositorio os métodos
-import conexao from '../database/conexao.js'
 import ClienteRepository from '../repositories/ClienteRepository.js'
 
 class ClienteController{

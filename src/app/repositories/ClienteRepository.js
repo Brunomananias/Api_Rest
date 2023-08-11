@@ -1,5 +1,5 @@
 import conexao from '../database/conexao.js'
-
+//Persistencia de dados
 class ClienteRepository {
     //CRUD // Colocar todas as regras para o SQL
     create(cliente) {
