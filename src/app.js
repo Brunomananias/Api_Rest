@@ -1,5 +1,7 @@
 import express from 'express'
 import ClienteController from './app/controllers/clienteController.js'
+
+
 const app = express()
 
 // indicar para o express ler body com json
