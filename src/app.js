@@ -1,21 +1,12 @@
 import express from 'express'
-import ClienteController from './app/controllers/clienteController.js'
-
+import routes from './routes.js'
 
 const app = express()
 
+//usar o router
+app.use(routes)
+
 // indicar para o express ler body com json
 app.use(express.json())
-
-//ROTAS
-app.get('/clientes', ClienteController.index)
-
-app.get('/clientes/:id', ClienteController.show)
-
-app.post('/clientes', ClienteController.store)
-
-app.delete('/clientes/:id', ClienteController.delete)
-
-app.put('/clientes/:id', ClienteController.update)
 
 export default app
