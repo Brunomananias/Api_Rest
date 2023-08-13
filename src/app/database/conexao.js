@@ -15,7 +15,7 @@ conexao.connect()
 /**
  * Executa um código sql com ou sem valores
  * @param {string} sql instrução sql a ser executada 
- * @param {string | [nomeCliente, idCliente]} valores a serem passados para o sql 
+ * @param {string=id | [cliente, id]} valores a serem passados para o sql 
  * @param {string} mensagemReject mensagem a ser exibida 
  * @returns objeto da Promisse
  */

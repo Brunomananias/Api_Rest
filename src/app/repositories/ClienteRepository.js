@@ -2,9 +2,9 @@ import { consulta } from '../database/conexao.js'
 //Persistencia de dados
 class ClienteRepository {
     //CRUD // Colocar todas as regras para o SQL
-    create(cliente) {
+    create(NomeCliente) {
         const sql = "INSERT INTO clientes SET ?"
-        return consulta(sql, cliente, 'Não foi possível localizar')
+        return consulta(sql, NomeCliente, 'Não foi possível localizar')
     }
 
     findAll() {

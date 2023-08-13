@@ -17,8 +17,8 @@ class ClienteController{
 
     //criar dados
     async store(req, res){
-            const nomeCliente = req.body
-            const row = await ClienteRepository.create(nomeCliente)
+            const cliente = req.body
+            const row = await ClienteRepository.create(cliente)
             res.json(row)
     }
 
