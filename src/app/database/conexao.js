@@ -19,11 +19,10 @@ conexao.connect()
  * @param {string} mensagemReject mensagem a ser exibida 
  * @returns objeto da Promisse
  */
-export const consulta = (sql, valores='', mensagemReject ) => {
+export const consulta = (sql, valores='', mensagemReject) => {
     return new Promise((resolve, reject) => {
         conexao.query(sql, valores, (error, result) => {
             if (error) return reject(mensagemReject)
-            // fazer o parse dos resultados
             const row = JSON.parse(JSON.stringify(result))
             return resolve(row)
         })

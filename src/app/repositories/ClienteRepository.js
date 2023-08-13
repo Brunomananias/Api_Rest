@@ -4,7 +4,7 @@ class ClienteRepository {
     //CRUD // Colocar todas as regras para o SQL
     create(cliente) {
         const sql = "INSERT INTO clientes SET ?"
-        return consulta(sql, cliente,'Não foi possível localizar')
+        return consulta(sql, cliente, 'Não foi possível localizar')
     }
 
     findAll() {
@@ -14,7 +14,7 @@ class ClienteRepository {
     }
 
     findById(id) {
-        const sql = "SELECT * FROM clientes WHERE idCliente=?;"
+        const sql = "SELECT * FROM clientes WHERE IdCliente=?;"
         return consulta(sql, id, 'Não foi possível localizar')
     }
 
